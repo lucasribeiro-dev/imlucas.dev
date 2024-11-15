@@ -1,0 +1,81 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+.intro {
+    text-align: center;
+    padding: 40px;
+}
+.profile-pic {
+    width: 135px;
+    height: 130px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+.download-btn {
+    background-color: #ff6f61;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.recommended-books, .articles {
+    margin:20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+}
+h2 {
+    color: #ff6f61;
+}
+a {
+    color: #ff6f61;
+}
+.articles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+.article {
+    text-align: center;
+    background-color: #282828;
+    padding: 15px 5px 0px 15px;
+    border-radius: 10px;
+}
+.article img {
+    width: 250px;
+    height: 160px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    loading: lazy;
+}
+@media (max-width: 768px) {
+    .articles-grid {
+        grid-template-columns: 1fr;
+    }
+    .intro {
+        padding: 30px;
+    }
+    .profile-pic {
+        width: 120px;
+        height: 120px;
+    }
+    .recommended-books, .articles {
+        margin: 20px auto;
+        padding: 15px;
+    }
+}
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    .download-btn {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+    .article h3 {
+        font-size: 1.2em;
+    }
+}
