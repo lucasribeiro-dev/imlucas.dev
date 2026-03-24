@@ -6,9 +6,9 @@ import remarkReadingTime from './src/utils/reading-time.mjs';
 export default defineConfig({
   site: 'https://imlucas.dev',
   output: 'static',
-  trailingSlash: 'never',
+  trailingSlash: 'ignore',
   build: {
-    format: 'file',
+    format: 'directory',
   },
   markdown: {
     syntaxHighlight: 'shiki',

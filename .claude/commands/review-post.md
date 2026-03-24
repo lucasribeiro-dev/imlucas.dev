@@ -18,7 +18,7 @@ For each blog post found:
    - Awkward or unclear phrasing
    - Redundant words or filler
    - Broken Markdown syntax (unclosed links, malformed code blocks, missing headings hierarchy)
-   - Consistency in tone (technical, direct, no fluff — matching the imlucas.dev voice)
+   - Consistency in tone (technical, direct, no fluff - matching the imlucas.dev voice)
 
 4. **Output a report for each post:**
    - List each issue with the original text and suggested fix

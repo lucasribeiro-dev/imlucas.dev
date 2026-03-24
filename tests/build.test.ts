@@ -16,11 +16,11 @@ describe('build output', () => {
 
   const requiredPages = [
     'index.html',
-    'about.html',
-    'blog.html',
-    'tags.html',
+    'about/index.html',
+    'blog/index.html',
+    'tags/index.html',
     '404.html',
-    'blog/hello-world.html',
+    'blog/hello-world/index.html',
   ];
 
   for (const page of requiredPages) {
@@ -89,12 +89,12 @@ describe('HTML content', () => {
   });
 
   it('blog post has reading time', () => {
-    const html = readFileSync(join(DIST, 'blog/hello-world.html'), 'utf-8');
+    const html = readFileSync(join(DIST, 'blog/hello-world/index.html'), 'utf-8');
     expect(html).toContain('min read');
   });
 
   it('blog post has tag links', () => {
-    const html = readFileSync(join(DIST, 'blog/hello-world.html'), 'utf-8');
+    const html = readFileSync(join(DIST, 'blog/hello-world/index.html'), 'utf-8');
     expect(html).toContain('/tags/engineering');
   });
 });
