@@ -1,0 +1,47 @@
+---
+import TagList from './TagList.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags: string[];
+  minutesRead?: string;
+}
+
+const { id, title, description, pubDate, tags, minutesRead } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<article
+  class="group rounded-xl border border-border bg-surface/50 p-6 transition-all hover:-translate-y-0.5 hover:border-accent/20 hover:shadow-lg hover:shadow-accent/5"
+>
+  <a href={`/blog/${id}`} class="block">
+    <div class="mb-3 flex items-center gap-3 font-mono text-xs text-text-dim">
+      <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+      {
+        minutesRead && (
+          <>
+            <span>&middot;</span>
+            <span>{minutesRead}</span>
+          </>
+        )
+      }
+    </div>
+    <h3
+      class="mb-2 font-heading text-xl font-semibold tracking-tight text-text transition-colors group-hover:text-accent"
+    >
+      {title}
+    </h3>
+    <p class="mb-4 text-sm leading-relaxed text-text-muted">
+      {description}
+    </p>
+  </a>
+  {tags.length > 0 && <TagList tags={tags} />}
+</article>

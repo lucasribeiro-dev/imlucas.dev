@@ -1,0 +1,187 @@
+---
+
+---
+
+<div class="relative" id="search-container">
+  <button
+    id="search-btn"
+    type="button"
+    aria-label="Search posts"
+    class="cursor-pointer rounded-lg border border-border p-2 text-text-muted transition-colors hover:border-accent hover:text-accent"
+  >
+    <svg
+      class="size-5"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path>
+    </svg>
+  </button>
+
+  <!-- Search modal -->
+  <div id="search-modal" class="fixed inset-0 z-[100] hidden">
+    <div id="search-overlay" class="absolute inset-0 bg-bg/80 backdrop-blur-sm"></div>
+    <div class="relative mx-auto mt-[15vh] w-full max-w-lg px-4">
+      <div class="rounded-xl border border-border bg-surface shadow-2xl">
+        <!-- Input -->
+        <div class="flex items-center gap-3 border-b border-border px-4 py-3">
+          <svg
+            class="size-5 shrink-0 text-text-muted"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            ></path>
+          </svg>
+          <input
+            id="search-input"
+            type="text"
+            placeholder="Search posts..."
+            autocomplete="off"
+            class="w-full bg-transparent font-body text-sm text-text placeholder:text-text-dim outline-none"
+          />
+          <kbd
+            class="hidden rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-text-dim sm:inline"
+            >ESC</kbd
+          >
+        </div>
+
+        <!-- Results -->
+        <div id="search-results" class="max-h-80 overflow-y-auto p-2">
+          <p id="search-empty" class="px-3 py-6 text-center text-sm text-text-dim">
+            Type to search...
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import Fuse from 'fuse.js';
+
+  interface SearchPost {
+    id: string;
+    title: string;
+    description: string;
+    tags: string[];
+    pubDate: string;
+  }
+
+  const modal = document.getElementById('search-modal')!;
+  const overlay = document.getElementById('search-overlay')!;
+  const input = document.getElementById('search-input') as HTMLInputElement;
+  const results = document.getElementById('search-results')!;
+  const empty = document.getElementById('search-empty')!;
+  const btn = document.getElementById('search-btn')!;
+  let fuse: Fuse<SearchPost> | null = null;
+  let posts: SearchPost[] | null = null;
+
+  function open() {
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    input.value = '';
+    results.replaceChildren(empty);
+    empty.textContent = 'Type to search...';
+    setTimeout(() => input.focus(), 50);
+    if (!posts) loadIndex();
+  }
+
+  function close() {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  async function loadIndex() {
+    try {
+      const res = await fetch('/search.json');
+      posts = await res.json();
+      fuse = new Fuse(posts!, {
+        keys: [
+          { name: 'title', weight: 2 },
+          { name: 'description', weight: 1 },
+          { name: 'tags', weight: 1.5 },
+        ],
+        threshold: 0.35,
+        includeScore: true,
+      });
+    } catch {
+      empty.textContent = 'Failed to load search index.';
+    }
+  }
+
+  function renderResults(items: Fuse.FuseResult<SearchPost>[]) {
+    results.replaceChildren();
+    if (items.length === 0) {
+      empty.textContent = 'No results found.';
+      results.appendChild(empty);
+      return;
+    }
+    items.slice(0, 8).forEach((item) => {
+      const post = item.item;
+      const date = new Date(post.pubDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      });
+
+      const a = document.createElement('a');
+      a.href = `/blog/${encodeURIComponent(post.id)}`;
+      a.className = 'block rounded-lg px-3 py-3 transition-colors hover:bg-border/50';
+
+      const titleEl = document.createElement('p');
+      titleEl.className = 'text-sm font-medium text-text';
+      titleEl.textContent = post.title;
+
+      const metaEl = document.createElement('p');
+      metaEl.className = 'mt-1 text-xs text-text-dim';
+      metaEl.textContent = date + (post.tags.length ? ' \u00B7 ' + post.tags.join(', ') : '');
+
+      a.appendChild(titleEl);
+      a.appendChild(metaEl);
+      results.appendChild(a);
+    });
+  }
+
+  btn.addEventListener('click', open);
+  overlay.addEventListener('click', close);
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      if (modal.classList.contains('hidden')) {
+        open();
+      } else {
+        close();
+      }
+    }
+    if (e.key === 'Escape') close();
+  });
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim();
+    if (!q) {
+      results.replaceChildren(empty);
+      empty.textContent = 'Type to search...';
+      return;
+    }
+    if (!fuse) {
+      empty.textContent = 'Loading...';
+      results.replaceChildren(empty);
+      return;
+    }
+    renderResults(fuse.search(q));
+  });
+</script>

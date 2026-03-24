@@ -1,0 +1,62 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-bg: #050508;
+  --color-surface: #0a0a0f;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-text: #f1f5f9;
+  --color-text-muted: #64748b;
+  --color-text-dim: #334155;
+  --color-accent: #7dd3fc;
+  --color-accent-hover: #38bdf8;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  :root:not(.dark) {
+    color-scheme: light;
+    --color-bg: #fafafa;
+    --color-surface: #ffffff;
+    --color-border: rgba(0, 0, 0, 0.08);
+    --color-text: #0f172a;
+    --color-text-muted: #64748b;
+    --color-text-dim: #94a3b8;
+    --color-accent: #0284c7;
+    --color-accent-hover: #0369a1;
+  }
+
+  html {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  body {
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Shiki dual theme support */
+  .shiki,
+  .shiki span {
+    color: var(--shiki-light) !important;
+    background-color: var(--shiki-light-bg) !important;
+  }
+
+  .dark .shiki,
+  .dark .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+}

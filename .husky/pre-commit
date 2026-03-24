@@ -1,0 +1,36 @@
+#!/bin/sh
+
+echo "🔍 Running pre-commit checks..."
+
+# 1. Review blog posts for grammar (if any .md files are staged)
+STAGED_POSTS=$(git diff --cached --name-only --diff-filter=ACM | grep '^src/content/blog/.*\.md$' || true)
+if [ -n "$STAGED_POSTS" ]; then
+  echo ""
+  echo "📝 Blog post(s) detected — running grammar review..."
+  for post in $STAGED_POSTS; do
+    echo "  Reviewing: $post"
+    # Run Claude review-post skill if claude CLI is available
+    if command -v claude > /dev/null 2>&1; then
+      claude -p "Review this blog post for grammar, spelling, and clarity errors. Only output issues found (with line and fix), or 'No issues found.' if clean. Be concise. File: $post" --allowedTools Read < /dev/null
+    else
+      echo "  ⚠ Claude CLI not found — skipping grammar review"
+    fi
+  done
+  echo ""
+fi
+
+# 2. Lint
+echo "📋 Running lint..."
+npm run lint || {
+  echo "❌ Lint failed. Run 'npm run lint:fix' to auto-fix."
+  exit 1
+}
+
+# 3. Tests
+echo "🧪 Running tests..."
+npm run test || {
+  echo "❌ Tests failed."
+  exit 1
+}
+
+echo "✅ All pre-commit checks passed."
