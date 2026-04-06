@@ -1,6 +1,7 @@
 export const SITE = {
   title: 'imlucas.dev',
-  description: 'AI deep-dives, system design breakdowns, and engineering war stories.',
+  description:
+    'Software engineer sharing insights on system design, distributed systems, and the patterns behind reliable software.',
   author: 'Lucas Ribeiro',
   gaId: 'G-6TF9NP73WP',
   gscVerification: 'qZm3_qONPl2ytaOxDyYmtvv0JIpkdz5JGrOlIRiQUaw',

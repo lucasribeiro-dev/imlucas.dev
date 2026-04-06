@@ -14,7 +14,8 @@ For each blog post found:
 3. **Review the body for:**
    - Spelling errors
    - Grammar mistakes (subject-verb agreement, tense consistency, article usage)
-   - Punctuation issues (missing commas, incorrect apostrophes, em-dash vs hyphen)
+   - Punctuation issues (missing commas, incorrect apostrophes)
+   - NEVER suggest adding em-dashes (—). If the post contains em-dashes, flag them for removal and suggest an alternative (comma, period, colon, or parentheses)
    - Awkward or unclear phrasing
    - Redundant words or filler
    - Broken Markdown syntax (unclosed links, malformed code blocks, missing headings hierarchy)

@@ -1,6 +1,6 @@
 ---
 title: 'Hello World: Why I Started This Blog'
-description: "The signal is live. Here's what to expect from imlucas.dev — AI deep-dives, system design breakdowns, and lessons from the trenches."
+description: "The signal is live. Here's what to expect from imlucas.dev: AI deep-dives, system design breakdowns, and lessons from the trenches."
 pubDate: 2026-03-24
 tags: ['engineering', 'meta']
 draft: false
@@ -10,7 +10,7 @@ draft: false
 
 After years of building software, debugging production incidents at 3 AM, and diving deep into AI systems, I decided it was time to write things down.
 
-Not the sanitized, marketing-approved version. The real stuff — the hard-won lessons, the architectural decisions that kept me up at night, and the insights that only come from shipping code to real users.
+Not the sanitized, marketing-approved version. The real stuff: the hard-won lessons, the architectural decisions that kept me up at night, and the insights that only come from shipping code to real users.
 
 ## What to Expect
 
@@ -22,11 +22,11 @@ Large language models are reshaping how we build software. I'll share practical 
 
 - Building production-ready AI pipelines
 - Prompt engineering beyond the basics
-- The systems behind the models — inference, fine-tuning, evaluation
+- The systems behind the models: inference, fine-tuning, evaluation
 
 ### System Design
 
-Clean architecture isn't optional — it's what separates prototypes from production systems. Expect breakdowns of:
+Clean architecture isn't optional. It's what separates prototypes from production systems. Expect breakdowns of:
 
 - Distributed systems patterns that actually work
 - Trade-offs I've encountered in real projects
