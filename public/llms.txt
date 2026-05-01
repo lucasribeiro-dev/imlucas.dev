@@ -1,0 +1,23 @@
+# imlucas.dev
+
+> Software engineer sharing insights on system design, distributed systems, and the patterns behind reliable software.
+
+Personal blog by Lucas Ribeiro covering AI deep-dives, system design breakdowns, and engineering lessons from production systems.
+
+## Blog Posts
+
+- [System Design: The Complete Engineer's Guide](https://imlucas.dev/blog/system-design-the-complete-engineers-guide/): Most system design resources teach you enough to draw boxes on a whiteboard. This guide covers what actually breaks under load and how engineers make real trade-offs in production.
+- [How Does a Large Language Model Actually Work? An Engineering Perspective](https://imlucas.dev/blog/how-does-a-large-language-model-actually-work/): A ground-up walkthrough of the LLM stack: tokenization, transformer internals, training pipelines, and inference optimization, from an engineering perspective.
+- [Hello World: Why I Started This Blog](https://imlucas.dev/blog/hello-world/): The signal is live. Here's what to expect from imlucas.dev: AI deep-dives, system design breakdowns, and lessons from the trenches.
+
+## Pages
+
+- [Home](https://imlucas.dev/): Landing page with recent posts.
+- [Blog](https://imlucas.dev/blog/): Full list of published posts.
+- [About](https://imlucas.dev/about/): About Lucas Ribeiro.
+- [Tags](https://imlucas.dev/tags/): Browse posts by tag.
+
+## Feeds
+
+- [RSS Feed](https://imlucas.dev/rss.xml): Subscribe to new posts.
+- [Sitemap](https://imlucas.dev/sitemap-index.xml): XML sitemap.

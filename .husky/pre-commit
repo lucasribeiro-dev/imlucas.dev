@@ -19,14 +19,20 @@ if [ -n "$STAGED_POSTS" ]; then
   echo ""
 fi
 
-# 2. Lint
+# 2. Keep llms.txt in sync when blog posts are added or changed
+if [ -n "$STAGED_POSTS" ]; then
+  node scripts/update-llms.mjs
+  git add public/llms.txt
+fi
+
+# 3. Lint
 echo "📋 Running lint..."
 npm run lint || {
   echo "❌ Lint failed. Run 'npm run lint:fix' to auto-fix."
   exit 1
 }
 
-# 3. Tests
+# 4. Tests
 echo "🧪 Running tests..."
 npm run test || {
   echo "❌ Tests failed."
