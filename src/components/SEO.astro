@@ -3,6 +3,7 @@ import { SITE } from '../consts';
 
 interface Props {
   title?: string;
+  standaloneTitle?: string;
   description?: string;
   image?: string;
   type?: string;
@@ -11,13 +12,14 @@ interface Props {
 
 const {
   title,
+  standaloneTitle,
   description = SITE.description,
   image = '/og-default.png',
   type = 'website',
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
 } = Astro.props;
 
-const pageTitle = title ? `${title} — ${SITE.title}` : SITE.title;
+const pageTitle = standaloneTitle ?? (title ? `${title} — ${SITE.title}` : SITE.title);
 const imageURL = new URL(image, Astro.site).href;
 ---
 

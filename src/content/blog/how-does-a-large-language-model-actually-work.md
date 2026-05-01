@@ -1,5 +1,6 @@
 ---
 title: 'How Does a Large Language Model Actually Work? An Engineering Perspective'
+seoTitle: 'How Does a Large Language Model Actually Work?'
 description: 'A ground-up walkthrough of the LLM stack: tokenization, transformer internals, training pipelines, and inference optimization, from an engineering perspective.'
 pubDate: 2026-04-06
 tags: ['ai', 'engineering']

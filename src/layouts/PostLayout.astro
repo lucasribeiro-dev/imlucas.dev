@@ -5,6 +5,7 @@ import TagList from '../components/TagList.astro';
 
 interface Props {
   title: string;
+  seoTitle?: string;
   description: string;
   pubDate: Date;
   updatedDate?: Date;
@@ -14,8 +15,17 @@ interface Props {
   heroAlt?: string;
 }
 
-const { title, description, pubDate, updatedDate, tags, minutesRead, heroImage, heroAlt } =
-  Astro.props;
+const {
+  title,
+  seoTitle,
+  description,
+  pubDate,
+  updatedDate,
+  tags,
+  minutesRead,
+  heroImage,
+  heroAlt,
+} = Astro.props;
 
 const formattedDate = pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -30,7 +40,7 @@ const formattedUpdated = updatedDate?.toLocaleDateString('en-US', {
 });
 ---
 
-<BaseLayout title={title} description={description} type="article">
+<BaseLayout title={seoTitle ?? title} description={description} type="article">
   <article class="mx-auto max-w-3xl px-6 py-16">
     <!-- Post header -->
     <header class="mb-10">
