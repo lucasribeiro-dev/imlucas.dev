@@ -18,8 +18,8 @@ const recentPosts = await Promise.all(
 <BaseLayout standaloneTitle="imlucas.dev — Software Engineering & System Design">
   <!-- Hero -->
   <section class="relative overflow-hidden">
-    <!-- Background effects -->
-    <div class="absolute inset-0 -z-10">
+    <!-- Background effects (hidden on mobile — blur filters are too costly for mobile GPU) -->
+    <div class="absolute inset-0 -z-10 hidden sm:block">
       <div
         class="absolute left-1/2 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-accent/5 blur-[120px]"
       >

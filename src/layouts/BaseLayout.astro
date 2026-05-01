@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import SEO from '../components/SEO.astro';
 import { SITE } from '../consts';
 import '../styles/global.css';
+import spaceGroteskUrl from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2';
 
 interface Props {
   title?: string;
@@ -21,6 +22,8 @@ const { title, standaloneTitle, description, image, type } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preload critical font so it starts fetching in parallel with CSS -->
+    <link rel="preload" href={spaceGroteskUrl} as="font" type="font/woff2" crossorigin />
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
